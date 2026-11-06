@@ -1,4 +1,4 @@
-// RAR Space Saver
+// Archive Space Saver
 //
 // Extracts a single .rar or .zip using the 7z.dll from your installed 7-Zip and, while it works, hands
 // the disk space of the already-read part of the archive back to Windows (NTFS sparse "punch hole"), so
@@ -42,7 +42,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
 
-namespace RarSpaceSaver
+namespace ArchiveSpaceSaver
 {
     // ------------------------------------------------------------------------------------------
     // Win32 interop
@@ -1484,7 +1484,7 @@ namespace RarSpaceSaver
 
         public MainForm()
         {
-            Text = "RAR Space Saver";
+            Text = "Archive Space Saver";
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(780, 620);
@@ -1502,7 +1502,7 @@ namespace RarSpaceSaver
             Controls.Add(root);
 
             Label title = new Label();
-            title.Text = "RAR Space Saver";
+            title.Text = "Archive Space Saver";
             title.Font = new Font("Segoe UI Semibold", 16F);
             title.AutoSize = true;
             root.Controls.Add(title, 0, 0);
@@ -1727,7 +1727,7 @@ namespace RarSpaceSaver
             if (p.Error != null)
             {
                 lblStatus.Text = "Can't start.";
-                MessageBox.Show(this, p.Error, "RAR Space Saver", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, p.Error, "Archive Space Saver", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 SetBusy(false);
                 return;
             }
@@ -1763,7 +1763,7 @@ namespace RarSpaceSaver
                                (chkDelete.Checked ? " (deleting it at the end only if everything extracted OK)." : "."));
             msg.AppendLine();
             msg.AppendLine("Continue?");
-            if (MessageBox.Show(this, msg.ToString(), "RAR Space Saver", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+            if (MessageBox.Show(this, msg.ToString(), "Archive Space Saver", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
             {
                 lblStatus.Text = "Cancelled before starting. Nothing was changed.";
                 SetBusy(false);
@@ -1794,7 +1794,7 @@ namespace RarSpaceSaver
                 "Stop extracting?\n\nThe part already extracted stays in the folder" + (ArchiveStillWhole()
                     ? ". Nothing has been taken out of the " + engine.Arc + " so far, so it can still be extracted again later."
                     : ", but this " + engine.Arc + " can no longer be extracted completely."),
-                "RAR Space Saver", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                "Archive Space Saver", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (r == DialogResult.Yes) { lblStatus.Text = "Stopping..."; engine.Cancel(); }
         }
 
@@ -1805,7 +1805,7 @@ namespace RarSpaceSaver
                 "Extraction is still running. Closing now will stop it" + (ArchiveStillWhole()
                     ? ". Nothing has been taken out of the " + engine.Arc + " so far."
                     : ", and this " + engine.Arc + " can no longer be extracted completely.") + "\n\nStop and close?",
-                "RAR Space Saver", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                "Archive Space Saver", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (r != DialogResult.Yes) { e.Cancel = true; return; }
             engine.Cancel();
         }
@@ -1847,7 +1847,7 @@ namespace RarSpaceSaver
                 lblStatus.Text = phase == RunPhase.Finishing ? "Finishing up..." : "Opening the archive...";
             }
             lblStatus.ForeColor = paused ? WarnColor : SystemColors.ControlText;
-            string title = paused ? "PAUSED (drive full) - RAR Space Saver" : "RAR Space Saver"; // shows on the taskbar too
+            string title = paused ? "PAUSED (drive full) - Archive Space Saver" : "Archive Space Saver"; // shows on the taskbar too
             if (Text != title) Text = title;
 
             lblStats.Text = "Time: " + Util.Duration(e.Elapsed) +
@@ -1870,7 +1870,7 @@ namespace RarSpaceSaver
             running = false;
             btnCancel.Enabled = false;
             bar.Style = ProgressBarStyle.Continuous;
-            Text = "RAR Space Saver";
+            Text = "Archive Space Saver";
             lblStatus.ForeColor = SystemColors.ControlText;
             SetBusy(false);
 
@@ -1930,7 +1930,7 @@ namespace RarSpaceSaver
             log.Append(s.ToString());
             txtLog.Text = log.ToString().Replace("\r\n", "\n").Replace("\n", "\r\n");
             lblStats.Text = "Time: " + Util.Duration(r.Elapsed) + "     Space given back from the " + arc + ": " + Util.Size(r.FreedBytes);
-            MessageBox.Show(this, s.ToString(), "RAR Space Saver", MessageBoxButtons.OK, icon);
+            MessageBox.Show(this, s.ToString(), "Archive Space Saver", MessageBoxButtons.OK, icon);
         }
     }
 #endif
@@ -1938,7 +1938,7 @@ namespace RarSpaceSaver
     static class Program
     {
 #if CLI
-        // Test harness build (not shipped): RarSpaceSaverCli.exe, see the usage line below.
+        // Test harness build (not shipped): ArchiveSpaceSaverCli.exe, see the usage line below.
         [STAThread]
         static int Main(string[] args)
         {

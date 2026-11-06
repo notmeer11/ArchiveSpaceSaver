@@ -1,11 +1,11 @@
-RAR Space Saver
-===============
+Archive Space Saver
+=====================
 
 Extracts a single .rar or .zip and gives the archive's disk space back while it works, so a
 50 GB download needs about 50 GB free instead of 100 GB.
 
 Use it:
-  1. Double-click RarSpaceSaver.exe (no install, no admin rights).
+  1. Double-click ArchiveSpaceSaver.exe (no install, no admin rights).
   2. Pick the .rar or .zip, pick an EMPTY or NEW folder to extract into, click Start.
   3. Read the confirmation, click Yes.
 
