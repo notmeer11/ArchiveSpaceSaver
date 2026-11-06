@@ -2,7 +2,7 @@ Archive Space Saver
 ===================
 
 Extracts a .rar or .zip and gives the archive's disk space back as it goes. So a 50 GB download
-needs about 50 GB free instead of 100 GB.
+needs about 50 GB free instead of 100 GB. i have used it to extract steamrip and ankergames games and it has worked for me.
 
 How to use it
   1. Double click ArchiveSpaceSaver.exe (no install, no admin needed)
